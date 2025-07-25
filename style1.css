@@ -1,0 +1,528 @@
+/* Custom Properties (CSS Variables) */
+:root {
+    --primary-bg: #f5f5f5; /* Light gray background */
+    --secondary-bg: #ffffff; /* White background for cards/overlays */
+    --dark-bg: #333333; /* Dark background for sections/footer */
+    --text-color-dark: #222222; /* Dark text for headings/body */
+    --text-color-light: #f5f5f5; /* Light text for dark backgrounds */
+    --accent-color: #ef4444; /* Red accent color */
+    --accent-hover-color: #dc2626; /* Darker red on hover */
+    --border-color: #e5e7eb; /* Light border color */
+    --shadow-color: rgba(0, 0, 0, 0.1); /* Subtle shadow */
+
+    --font-inter: 'Inter', sans-serif;
+    --font-playfair: 'Playfair Display', serif;
+
+     --subtle-background-pattern: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.01),
+    rgba(0, 0, 0, 0.01) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden; /* Add it here as well for maximum effect */
+}
+
+body {
+    font-family: var(--font-inter);
+    color: var(--text-color-dark);
+    background-color: var(--primary-bg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+     background-image: var(--subtle-background-pattern); /* Subtle background pattern */
+     overflow-x: hidden; /* Add this line to prevent horizontal scrolling */
+}
+
+/* Container for consistent padding */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem; /* 24px */
+}
+
+/* Header Section */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background-color: rgba(255, 255, 255, 0.9);
+    -webkit-backdrop-filter: blur(8px); /* Safari compatibility */
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 4px var(--shadow-color);
+    padding: 1rem 1.5rem; /* 16px 24px */
+    border-bottom-left-radius: 0.5rem; /* 8px */
+    border-bottom-right-radius: 0.5rem; /* 8px */
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 700;
+    color: var(--text-color-dark);
+}
+
+.nav-desktop {
+    display: none; /* Hidden by default, shown on larger screens */
+}
+
+.nav-desktop ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem; /* 32px */
+}
+
+.nav-desktop ul li a {
+    text-decoration: none;
+    color: var(--text-color-dark);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-desktop ul li a:hover {
+    color: var(--accent-color);
+}
+
+.nav-icons {
+    display: flex; /* Always visible */
+    align-items: center;
+    gap: 1.5rem; /* 24px */
+}
+
+.menu-icon, .mail-icon {
+    font-size: 1.5rem; /* 24px */
+    color: var(--text-color-dark);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.menu-icon:hover, .mail-icon:hover {
+    color: var(--accent-color);
+}
+
+/* Mobile Navigation Menu */
+.nav-mobile {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Off-screen by default */
+    width: 250px;
+    height: 100vh;
+    background-color: var(--dark-bg);
+    padding-top: 4rem; /* 64px */
+    box-shadow: -4px 0 8px var(--shadow-color);
+    transition: right 0.3s ease-in-out;
+    z-index: 60;
+}
+
+.nav-mobile.active {
+    right: 0; /* Slide in */
+}
+
+.nav-mobile ul {
+    list-style: none;
+    padding: 0 1.5rem;
+}
+
+.nav-mobile ul li {
+    margin-bottom: 1.5rem; /* 24px */
+}
+
+.nav-mobile ul li a {
+    text-decoration: none;
+    color: var(--text-color-light);
+    font-size: 1.125rem; /* 18px */
+    font-weight: 500;
+    display: block;
+    padding: 0.5rem 0; /* 8px */
+    transition: color 0.3s ease;
+}
+
+.nav-mobile ul li a:hover {
+    color: var(--accent-color);
+}
+
+.close-icon {
+    position: absolute;
+    top: 1.5rem; /* 24px */
+    right: 1.5rem; /* 24px */
+    font-size: 1.8rem; /* 28px */
+    color: var(--text-color-light);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-icon:hover {
+    color: var(--accent-color);
+}
+
+/* Hero Section */
+.hero-section {
+    /* Removed background-image from here */
+    position: relative;
+    width: 100%;
+    height: 100vh; /* 100% of viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5rem; /* 80px (to account for fixed header) */
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    inset: 0; /* top, right, bottom, left to 0 */
+    background-image: url(monabackground.jpg); /* Moved background-image here */
+    background-size: cover; /* Changed from 100% to cover for better responsiveness */
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: opacity 0.5s ease;
+}
+
+.hero-overlay-content {
+    position: relative;
+    top: 25%;
+    z-index: 10;
+    text-align: center;
+    padding: 2rem; /* 32px */
+    background-color: transparent; /* Semi-transparent white */
+    border-radius: 0.75rem; /* 12px */
+    box-shadow: 0 4px 12px var(--shadow-color);
+    max-width: 500px;
+    margin: 0 auto;
+    transform: scale(0.95);
+    transition: transform 0.7s ease-out;
+}
+
+.hero-overlay-content:hover {
+    transform: scale(1);
+}
+
+.hero-title {
+    font-size: 3rem; /* 56px */
+    font-family: var(--font-playfair);
+    font-weight: 600;
+    color: whitesmoke;
+    margin-bottom: 1.5rem; /* 24px */
+}
+
+/* Buttons */
+.btn-primary {
+    padding: 0.75rem 2rem; /* 12px 32px */
+    background-color: var(--accent-color);
+    color: var(--text-color-light);
+    font-weight: 600;
+    border-radius: 9999px; /* Fully rounded */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06); /* Tailwind-like shadow */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover-color);
+    transform: scale(1.05);
+}
+
+.btn-secondary {
+    padding: 1rem 2.5rem; /* 16px 40px */
+    background-color: var(--dark-bg);
+    color: var(--text-color-light);
+    font-weight: 600;
+    border-radius: 9999px; /* Fully rounded */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none; /* Added for anchor tags */
+    display: inline-block; /* Added for anchor tags to apply padding/margins correctly */
+}
+
+.btn-secondary:hover {
+    background-color: #1a1a1a; /* Slightly darker */
+    transform: scale(1.05);
+}
+
+/* Subsequent Section: The Perfect Model for Every Vision */
+.vision-section {
+    padding: 5rem 1.5rem; /* 80px 24px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vision-title {
+    font-size: 2.25rem; /* 36px */
+    font-family: var(--font-playfair);
+    font-weight: 500;
+    color: var(--text-color-dark);
+    text-align: center;
+    max-width: 600px;
+    line-height: 1.4;
+}
+
+/* General Section Titles */
+.section-title {
+    font-size: 2.5rem; /* 40px */
+    font-family: var(--font-playfair);
+    font-weight: 600;
+    color: var(--text-color-dark);
+    text-align: center;
+    margin-bottom: 3rem; /* 48px */
+}
+
+.section-title-light {
+    font-size: 2.5rem; /* 40px */
+    font-family: var(--font-playfair);
+    font-weight: 600;
+    color: var(--text-color-light);
+    text-align: center;
+    margin-bottom: 2rem; /* 32px */
+}
+
+/* Portfolio Section */
+.portfolio-section {
+    padding: 5rem 0; /* 80px vertical padding */
+    background-color: var(--primary-bg);
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column by default */
+    gap: 2rem; /* 32px */
+    margin-bottom: 3rem; /* 48px */
+}
+
+.portfolio-item {
+    background-color: var(--secondary-bg);
+    border-radius: 0.5rem; /* 8px */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    transform: scale(1);
+    transition: transform 0.3s ease;
+}
+
+.portfolio-item:hover {
+    transform: scale(1.05);
+}
+
+.portfolio-image {
+    width: 100%;
+    height: cover; /* Fixed height for consistency */
+    object-fit: cover;
+}
+
+.portfolio-content {
+    padding: 1.5rem; /* 24px */
+}
+
+.portfolio-heading {
+    font-size: 1.25rem; /* 20px */
+    font-weight: 600;
+    color: var(--text-color-dark);
+    margin-bottom: 0.5rem; /* 8px */
+}
+
+.portfolio-description {
+    color: #6b7280; /* Gray-600 */
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* About Section */
+.about-section {
+    padding: 5rem 0; /* 80px vertical padding */
+}
+
+.about-flex-container {
+    display: flex;
+    flex-direction: column; /* Stack vertically by default */
+    align-items: center;
+    gap: 3rem; /* 48px */
+}
+
+.about-image-wrapper {
+    width: 100%;
+}
+
+.about-image {
+    width: 100%;
+    height: auto;
+    border-radius: 0.75rem; /* 12px */
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.about-content {
+    width: 100%;
+    text-align: center;
+}
+
+.about-text {
+    font-size: 1.125rem; /* 18px */
+    color: #4b5563; /* Gray-700 */
+    line-height: 1.75;
+    margin-bottom: 1rem; /* 16px */
+}
+
+/* Contact Me Section */
+.contact-section {
+    padding: 5rem 0; /* 80px vertical padding */
+    background-color: var(--primary-bg); /* Use primary background or choose another */
+    color: var(--text-color-dark);
+}
+
+.contact-text {
+    font-size: 1.125rem; /* 18px */
+    margin-bottom: 2rem; /* 32px */
+}
+
+.contact-details {
+    margin-top: 1.5rem;
+    font-size: 1.125rem;
+}
+
+.contact-details p {
+    margin-bottom: 0.75rem;
+}
+
+.contact-details a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-details a:hover {
+    color: var(--accent-hover-color);
+    text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+    background-color: #1a1a1a; /* Even darker gray */
+    color: #d1d5db; /* Gray-300 */
+    padding: 2rem 0; /* 32px vertical padding */
+    text-align: center;
+    font-size: 0.875rem; /* 14px */
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem; /* 24px */
+    margin-top: 1rem; /* 16px */
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: #d1d5db;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent-color);
+}
+
+/* =======================================
+   Media Queries for Responsiveness
+   ======================================= */
+
+/* Medium screens (md: 768px and up) */
+@media (min-width: 768px) {
+    .header {
+        padding: 1rem 3rem; /* 16px 48px */
+    }
+    .nav-desktop {
+        display: block; /* Show desktop nav */
+    }
+    .menu-icon {
+        display: none; /* Hide mobile menu icon */
+    }
+    .mail-icon {
+        display: block; /* Show mail icon on desktop */
+    }
+
+    .hero-section {
+        height: 90vh; /* 90% of viewport height on larger screens */
+    }
+    .hero-title {
+        font-size: 4rem; /* 64px */
+    }
+    .vision-title {
+        font-size: 2.5rem; /* 40px */
+    }
+    .section-title {
+        font-size: 3rem; /* 48px */
+    }
+    .section-title-light {
+        font-size: 3rem; /* 48px */
+    }
+
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr); /* Two columns */
+    }
+    .about-flex-container {
+        flex-direction: row; /* Side-by-side */
+        text-align: left;
+    }
+    .about-image-wrapper {
+        flex: 1; /* Take half width */
+    }
+    .about-content {
+        flex: 1; /* Take half width */
+        text-align: left;
+    }
+}
+
+/* Large screens (lg: 1024px and up) */
+@media (min-width: 1024px) {
+    .header {
+        padding: 1rem 6rem; /* 16px 96px */
+    }
+    .hero-title {
+        font-size: 4.5rem; /* 72px */
+    }
+    .vision-title {
+        font-size: 2.75rem; /* 44px */
+    }
+    .section-title {
+        font-size: 3.5rem; /* 56px */
+    }
+    .section-title-light {
+        font-size: 3.5rem; /* 56px */
+    }
+    .portfolio-grid {
+        grid-template-columns: repeat(3, 1fr); /* Three columns */
+    }
+
+}
+
+/* Extra large screens (xl: 1280px and up) */
+@media (min-width: 1280px) {
+    .container {
+        padding: 0; /* Remove horizontal padding on very large screens for max-width */
+    }
+    .nav-icons {
+    display: none; /* not visible */
+}
+}
